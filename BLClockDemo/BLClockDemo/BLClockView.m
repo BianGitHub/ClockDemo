@@ -56,6 +56,9 @@
 
     // 创建秒针
     [self createSecond];
+    
+    // 获取初始角度
+    [self getCurrentTime];
 }
 
 // 创建秒针
@@ -75,6 +78,16 @@
     CGFloat angle = M_PI *2 / 60 / 60;
     
     self.secondLayer.transform = CATransform3DRotate(self.secondLayer.transform, angle, 0, 0, 1);
+}
+
+// 获取初始角度
+- (void)getCurrentTime {
+    
+    NSCalendar *calender = [NSCalendar currentCalendar];
+    NSInteger second = [calender component:NSCalendarUnitSecond fromDate:[NSDate date]];
+    
+    CGFloat angle = M_PI *2 / 60;
+    self.secondLayer.transform = CATransform3DRotate(self.secondLayer.transform, angle*second, 0, 0, 1);
 }
 
 - (void)dealloc {
